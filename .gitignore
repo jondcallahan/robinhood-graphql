@@ -1,3 +1,5 @@
+dist
+
 ### https://raw.github.com/github/gitignore/d45714707eeab8cbc35f37412162e76b0352746a/node.gitignore
 
 # Logs
@@ -67,5 +69,3 @@ Icon
 Network Trash Folder
 Temporary Items
 .apdisk
-
-

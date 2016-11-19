@@ -4,9 +4,10 @@
   "main": "index.js",
   "license": "MIT",
   "scripts": {
-    "start": "export DEBUG=App:* && nodemon lib/index.js --exec babel-node --presets es2015,stage-0",
+    "dev": "export DEBUG=App:* && nodemon lib/index.js --exec babel-node --presets es2015,stage-0",
     "build": "babel lib -d dist --presets es2015,stage-0 --require polyfill",
-    "serve": "node dist/index.js"
+    "prestart": "npm run build",
+    "start": "node dist/index.js"
   },
   "dependencies": {
     "babel-cli": "^6.18.0",
