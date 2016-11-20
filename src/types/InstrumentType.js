@@ -6,14 +6,14 @@ import {
   GraphQLBoolean,
 } from 'graphql'
 
-import fetchDataFromUrl from './utils/fetchDataFromUrl'
+import fetchDataFromUrl from '../utils/fetchDataFromUrl'
 
-import MarketType from './types/MarketType'
-import FundamentalsType from './types/FundamentalsType'
-import QuoteType from './types/Quotetype'
-import RhNewsType, { fetchRhNews } from './types/RhNewsType'
-import HistoricalsType, { fetchHistoricals } from './types/RhNewsType'
-import GoogleNewsStoryType, { fetchGoogleNews } from './types/GoogleNewsStoryType' // eslint-disable-line
+import MarketType from './MarketType'
+import FundamentalsType from './FundamentalsType'
+import QuoteType from './Quotetype'
+import RhNewsType, { fetchRhNews } from './RhNewsType'
+import HistoricalsType, { fetchHistoricals } from './HistoricalType'
+import GoogleNewsStoryType, { fetchGoogleNews } from './GoogleNewsStoryType' // eslint-disable-line
 
 import constants from '../constants'
 const BASE_URL = constants.BASE_URL

@@ -3,7 +3,7 @@ import {
   GraphQLString,
 } from 'graphql'
 import fetchDataFromUrl from '../utils/fetchDataFromUrl'
-import { InstrumentType, fetchInstrument } from './schema'
+import InstrumentType, { fetchInstrument } from './InstrumentType'
 
 import constants from '../constants'
 const BASE_URL = constants.BASE_URL

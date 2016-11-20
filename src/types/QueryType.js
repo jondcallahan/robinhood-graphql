@@ -6,8 +6,8 @@ import {
 } from 'graphql'
 import 'babel-polyfill'
 
-import InstrumentType, { fetchInstrument } from './types/InstrumentType'
-import MoverType, { fetchMovers } from './types/MoverType'
+import InstrumentType, { fetchInstrument } from './InstrumentType'
+import MoverType, { fetchMovers } from './MoverType'
 
 const QueryType = new GraphQLObjectType({
   name: 'Query',
