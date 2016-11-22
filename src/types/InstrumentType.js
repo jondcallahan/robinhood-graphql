@@ -5,7 +5,7 @@ import {
   GraphQLList,
   GraphQLBoolean,
 } from 'graphql'
-
+const debug = require('debug')('App:InstrumentType')
 import fetchDataFromUrl from '../utils/fetchDataFromUrl'
 
 import MarketType from './MarketType'
@@ -17,6 +17,20 @@ import GoogleNewsStoryType, { fetchGoogleNews } from './GoogleNewsStoryType' // 
 
 import constants from '../constants'
 const BASE_URL = constants.BASE_URL
+
+export const fetchInstrument = async (root, args) => {
+  debug('Fetching Instrument')
+  let url
+  if (args.id) {
+    url = `${BASE_URL}/instruments/${args.id}`
+  } else if (args.symbol) {
+    url = `${BASE_URL}/instruments/?symbol=${args.symbol}`
+  }
+
+  const data = await fetchDataFromUrl(url)
+  const result = args.symbol ? data.results[0] : data
+  return result
+}
 
 const InstrumentType = new GraphQLObjectType({
   name: 'Instrument',
@@ -68,18 +82,4 @@ const InstrumentType = new GraphQLObjectType({
   }),
 })
 
-const fetchInstrument = async (root, args) => {
-  let url
-  if (args.id) {
-    url = `${BASE_URL}/instruments/${args.id}`
-  } else if (args.symbol) {
-    url = `${BASE_URL}/instruments/?symbol=${args.symbol}`
-  }
-
-  const data = await fetchDataFromUrl(url)
-  const result = args.symbol ? data.results[0] : data
-  return result
-}
-
 export default InstrumentType
-export { fetchInstrument }

@@ -2,12 +2,14 @@ import {
   GraphQLObjectType,
   GraphQLString,
 } from 'graphql'
+const debug = require('debug')('App:RhNewsType')
 import fetchDataFromUrl from '../utils/fetchDataFromUrl'
 import constants from '../constants'
 
 const BASE_URL = constants.BASE_URL
 
 const fetchRhNews = async (symbol) => {
+  debug('Fetching RhNews')
   const url = `${BASE_URL}/midlands/news/${symbol}/`
   const data = await fetchDataFromUrl(url)
   return data.results

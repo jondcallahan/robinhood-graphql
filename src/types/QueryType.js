@@ -8,6 +8,7 @@ import 'babel-polyfill'
 
 import InstrumentType, { fetchInstrument } from './InstrumentType'
 import MoverType, { fetchMovers } from './MoverType'
+import UserType, { fetchUser } from './UserType'
 
 const QueryType = new GraphQLObjectType({
   name: 'Query',
@@ -28,6 +29,10 @@ const QueryType = new GraphQLObjectType({
         limit: { type: GraphQLInt },
       },
       resolve: (root, args) => fetchMovers(args),
+    },
+    user: {
+      type: UserType,
+      resolve: (root, args, context) => fetchUser(context.headers.token),
     },
   }),
 })

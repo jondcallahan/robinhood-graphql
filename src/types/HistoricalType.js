@@ -11,6 +11,14 @@ const debug = require('debug')('App:HistoricalsType')
 
 const BASE_URL = constants.BASE_URL
 
+export const fetchHistoricals = async (instrument, { interval, span }) => {
+  debug('fetching historicals')
+  let url = `${BASE_URL}/quotes/historicals/?instruments=/instruments/${instrument.id}/&interval=${interval}` // eslint-disable-line
+  url = span ? `${url}&span=${span}` : url
+  const data = await fetchDataFromUrl(url)
+  return data.results[0]
+}
+
 const HistoricalsType = new GraphQLObjectType({
   name: 'Historicals',
   description: 'Historical pricing info with OHLC',
@@ -42,13 +50,4 @@ const HistoricalsType = new GraphQLObjectType({
   }),
 })
 
-const fetchHistoricals = async (instrument, { interval, span }) => {
-  debug('fetching historicals')
-  let url = `${BASE_URL}/quotes/historicals/?instruments=/instruments/${instrument.id}/&interval=${interval}` // eslint-disable-line
-  url = span ? `${url}&span=${span}` : url
-  const data = await fetchDataFromUrl(url)
-  return data.results[0]
-}
-
 export default HistoricalsType
-export { fetchHistoricals }
