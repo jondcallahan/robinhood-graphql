@@ -13,6 +13,7 @@ import FundamentalsType from './FundamentalsType'
 import QuoteType from './Quotetype'
 import RhNewsType, { fetchRhNews } from './RhNewsType'
 import HistoricalsType, { fetchHistoricals } from './HistoricalType'
+import EarningsType, { fetchEarnings } from './EarningsType'
 import GoogleNewsStoryType, { fetchGoogleNews } from './GoogleNewsStoryType' // eslint-disable-line
 
 import constants from '../constants'
@@ -70,6 +71,10 @@ const InstrumentType = new GraphQLObjectType({
         span: { type: GraphQLString },
       },
       resolve: (instrument, args) => fetchHistoricals(instrument, args),
+    },
+    earnings: {
+      type: new GraphQLList(EarningsType),
+      resolve: (instrument) => fetchEarnings(instrument.symbol),
     },
     rh_news: {
       type: new GraphQLList(RhNewsType),
