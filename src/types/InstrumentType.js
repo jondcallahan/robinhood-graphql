@@ -20,7 +20,7 @@ import constants from '../constants'
 const BASE_URL = constants.BASE_URL
 
 export const fetchInstrument = async (root, args) => {
-  debug('Fetching Instrument')
+  debug('Fetching Instrument', args.symbol || args.id)
   let url
   if (args.id) {
     url = `${BASE_URL}/instruments/${args.id}`
