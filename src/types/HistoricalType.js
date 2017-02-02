@@ -13,8 +13,9 @@ const BASE_URL = constants.BASE_URL
 
 export const fetchHistoricals = async (instrument, { interval, span }) => {
   debug('fetching historicals')
-  let url = `${BASE_URL}/quotes/historicals/?instruments=/instruments/${instrument.id}/&interval=${interval}&bounds=trading` // eslint-disable-line
+  let url = `${BASE_URL}/quotes/historicals/?instruments=/instruments/${instrument.id}/&interval=${interval}` // eslint-disable-line
   url = span ? `${url}&span=${span}` : url
+  url = (span === 'day') ? `${url}&bounds=trading` : url
   const data = await fetchDataFromUrl(url)
   return data.results[0]
 }
