@@ -1577,22 +1577,9 @@ globby@^5.0.0:
     pify "^2.0.0"
     pinkie-promise "^2.0.0"
 
-google-finance@^0.1.7:
+"google-finance@https://github.com/jondcallahan/node-google-finance.git":
   version "0.1.10"
-  resolved "https://registry.yarnpkg.com/google-finance/-/google-finance-0.1.10.tgz#1229042020e1d7f45a9fa69199fb6991db2ea42f"
-  dependencies:
-    bluebird "3.4.1"
-    debug "2.2.0"
-    feedparser "1.1.4"
-    lodash "4.15.0"
-    moment "2.14.1"
-    request "2.74.0"
-    request-promise "4.1.1"
-    string "3.3.1"
-
-"google-finance@git+ssh://git@github.com:jondcallahan/node-google-finance.git":
-  version "0.1.10"
-  resolved "git+ssh://git@github.com:jondcallahan/node-google-finance.git#db0ff975e77fa27d08e04c91b270d5fe8edfc84b"
+  resolved "https://github.com/jondcallahan/node-google-finance.git#db0ff975e77fa27d08e04c91b270d5fe8edfc84b"
   dependencies:
     bluebird "3.4.1"
     debug "2.2.0"
