@@ -3,11 +3,11 @@ import {
   GraphQLString,
   GraphQLBoolean,
   GraphQLInt,
-} from 'graphql'
+} from 'graphql';
 
 const QuoteType = new GraphQLObjectType({
   name: 'InstrumentQuote',
-  description: 'today\'s quote',
+  description: "today's quote",
   fields: () => ({
     ask_price: { type: GraphQLString },
     ask_size: { type: GraphQLInt },
@@ -23,6 +23,6 @@ const QuoteType = new GraphQLObjectType({
     last_trade_price_source: { type: GraphQLString },
     updated_at: { type: GraphQLString },
   }),
-})
+});
 
-export default QuoteType
+export default QuoteType;

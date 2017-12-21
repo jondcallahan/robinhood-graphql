@@ -1,19 +1,16 @@
-import {
-  GraphQLObjectType,
-  GraphQLString,
-} from 'graphql'
-const debug = require('debug')('App:RhNewsType')
-import fetchDataFromUrl from '../utils/fetchDataFromUrl'
-import constants from '../constants'
+import { GraphQLObjectType, GraphQLString } from 'graphql';
+const debug = require('debug')('App:RhNewsType');
+import fetchDataFromUrl from '../utils/fetchDataFromUrl';
+import constants from '../constants';
 
-const BASE_URL = constants.BASE_URL
+const BASE_URL = constants.BASE_URL;
 
-const fetchRhNews = async (symbol) => {
-  debug('Fetching RhNews')
-  const url = `${BASE_URL}/midlands/news/${symbol}/`
-  const data = await fetchDataFromUrl(url)
-  return data.results
-}
+const fetchRhNews = async symbol => {
+  debug('Fetching RhNews');
+  const url = `${BASE_URL}/midlands/news/${symbol}/`;
+  const data = await fetchDataFromUrl(url);
+  return data.results;
+};
 const RhNewsType = new GraphQLObjectType({
   name: 'RobinhoodNews',
   description: 'News stories from the Robinhood API',
@@ -27,6 +24,6 @@ const RhNewsType = new GraphQLObjectType({
     api_source: { type: GraphQLString },
     updated_at: { type: GraphQLString },
   }),
-})
-export default RhNewsType
-export { fetchRhNews }
+});
+export default RhNewsType;
+export { fetchRhNews };

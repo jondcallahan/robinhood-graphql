@@ -4,34 +4,34 @@ import {
   GraphQLString,
   GraphQLList,
   GraphQLBoolean,
-} from 'graphql'
-const debug = require('debug')('App:InstrumentType')
-import fetchDataFromUrl from '../utils/fetchDataFromUrl'
+} from 'graphql';
+const debug = require('debug')('App:InstrumentType');
+import fetchDataFromUrl from '../utils/fetchDataFromUrl';
 
-import MarketType from './MarketType'
-import FundamentalsType from './FundamentalsType'
-import QuoteType from './Quotetype'
-import RhNewsType, { fetchRhNews } from './RhNewsType'
-import HistoricalsType, { fetchHistoricals } from './HistoricalType'
-import EarningsType, { fetchEarnings } from './EarningsType'
-import GoogleNewsStoryType, { fetchGoogleNews } from './GoogleNewsStoryType' // eslint-disable-line
+import MarketType from './MarketType';
+import FundamentalsType from './FundamentalsType';
+import QuoteType from './Quotetype';
+import RhNewsType, { fetchRhNews } from './RhNewsType';
+import HistoricalsType, { fetchHistoricals } from './HistoricalType';
+import EarningsType, { fetchEarnings } from './EarningsType';
+import GoogleNewsStoryType, { fetchGoogleNews } from './GoogleNewsStoryType'; // eslint-disable-line
 
-import constants from '../constants'
-const BASE_URL = constants.BASE_URL
+import constants from '../constants';
+const BASE_URL = constants.BASE_URL;
 
 export const fetchInstrument = async (root, args) => {
-  debug('Fetching Instrument', args.symbol || args.id)
-  let url
+  debug('Fetching Instrument', args.symbol || args.id);
+  let url;
   if (args.id) {
-    url = `${BASE_URL}/instruments/${args.id}`
+    url = `${BASE_URL}/instruments/${args.id}`;
   } else if (args.symbol) {
-    url = `${BASE_URL}/instruments/?symbol=${args.symbol}`
+    url = `${BASE_URL}/instruments/?symbol=${args.symbol}`;
   }
 
-  const data = await fetchDataFromUrl(url)
-  const result = args.symbol ? data.results[0] : data
-  return result
-}
+  const data = await fetchDataFromUrl(url);
+  const result = args.symbol ? data.results[0] : data;
+  return result;
+};
 
 const InstrumentType = new GraphQLObjectType({
   name: 'Instrument',
@@ -52,17 +52,17 @@ const InstrumentType = new GraphQLObjectType({
     maintenance_ratio: { type: GraphQLString },
     market: {
       type: MarketType,
-      resolve: (instrument) => {
-        return fetchDataFromUrl(instrument.market)
+      resolve: instrument => {
+        return fetchDataFromUrl(instrument.market);
       },
     },
     quote: {
       type: QuoteType,
-      resolve: (instrument) => fetchDataFromUrl(instrument.quote),
+      resolve: instrument => fetchDataFromUrl(instrument.quote),
     },
     fundamentals: {
       type: FundamentalsType,
-      resolve: (instrument) => fetchDataFromUrl(instrument.fundamentals),
+      resolve: instrument => fetchDataFromUrl(instrument.fundamentals),
     },
     historicals: {
       type: HistoricalsType,
@@ -74,17 +74,17 @@ const InstrumentType = new GraphQLObjectType({
     },
     earnings: {
       type: new GraphQLList(EarningsType),
-      resolve: (instrument) => fetchEarnings(instrument.symbol),
+      resolve: instrument => fetchEarnings(instrument.symbol),
     },
     rh_news: {
       type: new GraphQLList(RhNewsType),
-      resolve: (instrument) => fetchRhNews(instrument.symbol),
+      resolve: instrument => fetchRhNews(instrument.symbol),
     },
     google_news: {
       type: new GraphQLList(GoogleNewsStoryType),
-      resolve: (instrument) => fetchGoogleNews(instrument.symbol),
+      resolve: instrument => fetchGoogleNews(instrument.symbol),
     },
   }),
-})
+});
 
-export default InstrumentType
+export default InstrumentType;

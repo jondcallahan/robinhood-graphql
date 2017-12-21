@@ -1,4 +1,4 @@
-import { GraphQLObjectType, GraphQLString } from 'graphql'
+import { GraphQLObjectType, GraphQLString } from 'graphql';
 
 const FundamentalsType = new GraphQLObjectType({
   name: 'InstrumentFundamentals',
@@ -16,6 +16,6 @@ const FundamentalsType = new GraphQLObjectType({
     pe_ratio: { type: GraphQLString },
     description: { type: GraphQLString },
   }),
-})
+});
 
-export default FundamentalsType
+export default FundamentalsType;

@@ -1,10 +1,6 @@
-import {
-  GraphQLObjectType,
-  GraphQLString,
-  GraphQLBoolean,
-} from 'graphql'
-import 'babel-polyfill'
-import fetchDataFromUrl from '../utils/fetchDataFromUrl'
+import { GraphQLObjectType, GraphQLString, GraphQLBoolean } from 'graphql';
+import 'babel-polyfill';
+import fetchDataFromUrl from '../utils/fetchDataFromUrl';
 
 const MarketHoursType = new GraphQLObjectType({
   name: 'MarketHoursType',
@@ -18,14 +14,14 @@ const MarketHoursType = new GraphQLObjectType({
     opens_at: { type: GraphQLString },
     next_open_hours: {
       type: MarketHoursType,
-      resolve: (hours) => fetchDataFromUrl(hours.next_open_hours),
+      resolve: hours => fetchDataFromUrl(hours.next_open_hours),
     },
     previous_open_hours: {
       type: MarketHoursType,
-      resolve: (hours) => fetchDataFromUrl(hours.previous_open_hours),
+      resolve: hours => fetchDataFromUrl(hours.previous_open_hours),
     },
   }),
-})
+});
 const MartketType = new GraphQLObjectType({
   name: 'MartketType',
   description: 'An exchange market',
@@ -40,8 +36,8 @@ const MartketType = new GraphQLObjectType({
     mic: { type: GraphQLString },
     todays_hours: {
       type: MarketHoursType,
-      resolve: (market) => fetchDataFromUrl(market.todays_hours),
+      resolve: market => fetchDataFromUrl(market.todays_hours),
     },
   }),
-})
-export default MartketType
+});
+export default MartketType;

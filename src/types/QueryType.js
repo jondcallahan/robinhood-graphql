@@ -3,12 +3,12 @@ import {
   GraphQLString,
   GraphQLInt,
   GraphQLList,
-} from 'graphql'
-import 'babel-polyfill'
+} from 'graphql';
+import 'babel-polyfill';
 
-import InstrumentType, { fetchInstrument } from './InstrumentType'
-import MoverType, { fetchMovers } from './MoverType'
-import UserType, { fetchUser } from './UserType'
+import InstrumentType, { fetchInstrument } from './InstrumentType';
+import MoverType, { fetchMovers } from './MoverType';
+import UserType, { fetchUser } from './UserType';
 
 const QueryType = new GraphQLObjectType({
   name: 'Query',
@@ -35,6 +35,6 @@ const QueryType = new GraphQLObjectType({
       resolve: (root, args, context) => fetchUser(context.headers.token),
     },
   }),
-})
+});
 
-export default QueryType
+export default QueryType;

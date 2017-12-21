@@ -4,21 +4,23 @@ import {
   GraphQLList,
   GraphQLInt,
   GraphQLBoolean,
-} from 'graphql'
-import fetchDataFromUrl from '../utils/fetchDataFromUrl'
-import constants from '../constants'
-const debug = require('debug')('App:HistoricalsType')
+} from 'graphql';
+import fetchDataFromUrl from '../utils/fetchDataFromUrl';
+import constants from '../constants';
+const debug = require('debug')('App:HistoricalsType');
 
-const BASE_URL = constants.BASE_URL
+const BASE_URL = constants.BASE_URL;
 
 export const fetchHistoricals = async (instrument, { interval, span }) => {
-  debug('fetching historicals')
-  let url = `${BASE_URL}/quotes/historicals/?instruments=/instruments/${instrument.id}/&interval=${interval}` // eslint-disable-line
-  url = span ? `${url}&span=${span}` : url
-  url = (span === 'day') ? `${url}&bounds=trading` : url
-  const data = await fetchDataFromUrl(url)
-  return data.results[0]
-}
+  debug('fetching historicals');
+  let url = `${BASE_URL}/quotes/historicals/?instruments=/instruments/${
+    instrument.id
+  }/&interval=${interval}`; // eslint-disable-line
+  url = span ? `${url}&span=${span}` : url;
+  url = span === 'day' ? `${url}&bounds=trading` : url;
+  const data = await fetchDataFromUrl(url);
+  return data.results[0];
+};
 
 const HistoricalsType = new GraphQLObjectType({
   name: 'Historicals',
@@ -31,24 +33,25 @@ const HistoricalsType = new GraphQLObjectType({
     previous_close_price: { type: GraphQLString },
     open_price: { type: GraphQLString },
     open_time: { type: GraphQLString },
-    historicals: { type: new GraphQLList(
-      new GraphQLObjectType({
-        name: 'HistoricalSnapshot',
-        description: 'An OHLC+Volume object',
-        fields: () => ({
-          begins_at: { type: GraphQLString },
-          open_price: { type: GraphQLString },
-          close_price: { type: GraphQLString },
-          high_price: { type: GraphQLString },
-          low_price: { type: GraphQLString },
-          volume: { type: GraphQLInt },
-          session: { type: GraphQLString },
-          interpolated: { type: GraphQLBoolean },
-        }),
-      }),
-    ),
+    historicals: {
+      type: new GraphQLList(
+        new GraphQLObjectType({
+          name: 'HistoricalSnapshot',
+          description: 'An OHLC+Volume object',
+          fields: () => ({
+            begins_at: { type: GraphQLString },
+            open_price: { type: GraphQLString },
+            close_price: { type: GraphQLString },
+            high_price: { type: GraphQLString },
+            low_price: { type: GraphQLString },
+            volume: { type: GraphQLInt },
+            session: { type: GraphQLString },
+            interpolated: { type: GraphQLBoolean },
+          }),
+        })
+      ),
     },
   }),
-})
+});
 
-export default HistoricalsType
+export default HistoricalsType;
