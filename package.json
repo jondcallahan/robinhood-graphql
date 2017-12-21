@@ -19,7 +19,7 @@
     "cors": "^2.8.1",
     "express": "^4.14.0",
     "express-graphql": "^0.6.1",
-    "google-finance": "^0.1.7",
+    "google-finance": "git+ssh://git@github.com:jondcallahan/node-google-finance.git",
     "graphql": "^0.8.1",
     "node-fetch": "^1.6.3",
     "nodemon": "^1.11.0"
